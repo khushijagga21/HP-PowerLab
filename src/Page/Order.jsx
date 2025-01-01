@@ -71,6 +71,75 @@ export default function Ordering() {
             </a>
           </div>
         </div>
+      {/* Empty Cans*/}
+           
+           <div className="max-w-sm bg-white shadow-lg rounded-lg overflow-hidden hover:scale-105 transition-transform">
+          <img
+            src="https://m.media-amazon.com/images/I/71mm5ddz-CL.jpg"
+            className="w-full h-48 object-cover"
+          />
+          <div className="p-6">
+            <h2 className="text-2xl font-semibold text-gray-800 mb-2">Empty Cans</h2>
+            <p className="text-gray-600 mb-4">
+              Some quick example text to build on the card title and make up the bulk of the card's content.
+            </p>
+            <a
+              href="#"
+              className="block text-center py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+            >
+              Order Now
+            </a>
+          </div>
+        </div>
+
+
+
+           {/* Cylinders */}
+           <div className="max-w-sm bg-white shadow-lg rounded-lg overflow-hidden hover:scale-105 transition-transform">
+          <img
+            src="https://5.imimg.com/data5/MX/PE/KU/GLADMIN-9819795/ori-500x500.jpeg"
+            alt="Diesel"
+            className="w-full h-48 object-cover"
+          />
+          <div className="p-6">
+            <h2 className="text-2xl font-semibold text-gray-800 mb-2">Cylinders</h2>
+            <p className="text-gray-600 mb-4">
+              Some quick example text to build on the card title and make up the bulk of the card's content.
+            </p>
+            <a
+              href="#"
+              className="block text-center py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+            >
+              Order Now
+            </a>
+          </div>
+        </div>
+
+
+
+           {/* Diesel Card */}
+           <div className="max-w-sm bg-white shadow-lg rounded-lg overflow-hidden hover:scale-105 transition-transform">
+          <img
+            src="https://thumbs.dreamstime.com/b/historic-green-yellow-fuel-dispenser-diesel-petrol-german-text-blasenfrei-zapfen-engl-refuel-bubbles-historic-133050492.jpg"
+            alt="Diesel"
+            className="w-full h-48 object-cover"
+          />
+          <div className="p-6">
+            <h2 className="text-2xl font-semibold text-gray-800 mb-2">Diesel</h2>
+            <p className="text-gray-600 mb-4">
+              Some quick example text to build on the card title and make up the bulk of the card's content.
+            </p>
+            <a
+              href="#"
+              className="block text-center py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+            >
+              Order Now
+            </a>
+          </div>
+        </div>
+
+
+
       </div>
     </div>
   );

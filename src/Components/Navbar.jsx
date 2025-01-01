@@ -1,19 +1,32 @@
 import React from 'react';
+import { Link, useLocation } from 'react-router-dom'; // Import useLocation
+
 
 const Navbar = () => {
+    const location = useLocation(); // Get the current location
+
     return (
         <nav className="bg-blue-900 text-white shadow-lg">
             <div className="container mx-auto px-4">
                 <div className="flex items-center justify-between h-16">
-                    <div className="text-xl font-bold">HP</div>
+                    {/* Logo Section */}
+                    <div className="flex items-center space-x-2">
+                        <img
+                            src="/path/to/logo.png" // Replace with the actual logo path
+                            alt="HP Logo"
+                            className="h-10 w-10 object-contain"
+                        />
+                        <span className="text-xl font-bold">HP</span>
+                    </div>
+                    {/* Navigation Links */}
                     <ul className="hidden md:flex space-x-6">
                         <li>
-                            <a
-                                href="#about"
+                            <Link
+                                to="/about"
                                 className="hover:text-yellow-400 transition duration-300"
                             >
                                 About Us
-                            </a>
+                            </Link>
                         </li>
                         <li>
                             <a
@@ -24,12 +37,12 @@ const Navbar = () => {
                             </a>
                         </li>
                         <li>
-                            <a
-                                href="#retail"
+                            <Link
+                                to="/tips"
                                 className="hover:text-yellow-400 transition duration-300"
                             >
-                                Retail
-                            </a>
+                                Tips
+                            </Link>
                         </li>
                         <li>
                             <a
@@ -56,12 +69,12 @@ const Navbar = () => {
                             </a>
                         </li>
                         <li>
-                            <a
-                                href="#aviation"
+                            <Link
+                                to="/order"
                                 className="hover:text-yellow-400 transition duration-300"
                             >
-                                Aviation
-                            </a>
+                                Place Order
+                            </Link>
                         </li>
                         <li>
                             <a
@@ -80,6 +93,18 @@ const Navbar = () => {
                             </a>
                         </li>
                     </ul>
+                    {/* Conditional Buttons */}
+                    {location.pathname === '/order' && (
+                        <div className="hidden md:flex space-x-4">
+                            <button className="bg-blue-500 hover:bg-yellow-600 text-white font-semibold py-2 px-4 rounded">
+                                Cart
+                            </button>
+                            <button className="bg-blue-500 hover:bg-yellow-600 text-white font-semibold py-2 px-4 rounded">
+                                Wishlist
+                            </button>
+                        </div>
+                    )}
+                    {/* Mobile Menu Button */}
                     <div className="md:hidden">
                         <button
                             type="button"
