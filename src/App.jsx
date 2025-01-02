@@ -8,6 +8,12 @@ import Home from './Page/Home';
 import Ordering from './Page/Order';
 import About from './Page/About';
 import Tips from './Page/Tips';
+import FarmerOrder from './Page/FarmerOrder';
+import FarmerProfile from './Page/FarmerProfile';
+import DriverDeliver from './Page/DriverDeliver';
+import AdminDashboard from './Page/AdminDashboard';
+import AdminMangement from './Page/AdminMangement';
+import FarmerCommunity from './Page/FarmerCommunity';
 
 function App() {
   return (
@@ -20,7 +26,16 @@ function App() {
         <Route path="/order" element={<Ordering />} />
         <Route path="/about" element={<About />} />
         <Route path="/tips" element={<Tips />} /> 
+
+        <Route path="/farmerOrder" element={<FarmerOrder />} /> 
+        <Route path="/farmerProfile" element={<FarmerProfile/>} /> 
+        <Route path="/farmerCommunity" element={<FarmerCommunity />} />   {/* Ye mai bana dunga */}
+        
+        <Route path="/driverDelivery" element={<DriverDeliver />} />   
+        <Route path="/driverProfile" element={<Tips />} />   
   
+        <Route path="/adminDashboard" element={<AdminDashboard />} />   
+        <Route path="/driverProfile" element={<AdminMangement />} />   
       </Routes>
       <Footer />
     </Router>
