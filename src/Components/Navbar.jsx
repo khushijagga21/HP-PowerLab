@@ -85,12 +85,12 @@ const Navbar = () => {
                             </Link>
                         </li>
                         <li>
-                            <a
-                                href="#privacy"
+                            <Link
+                                to="farmerCommunity"
                                 className="hover:text-yellow-400 transition duration-300"
                             >
-                                Privacy Policy
-                            </a>
+                                Community
+                            </Link>
                         </li>
                     </ul>
                     {/* Conditional Buttons */}
