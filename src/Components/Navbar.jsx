@@ -29,12 +29,12 @@ const Navbar = () => {
                             </Link>
                         </li>
                         <li>
-                            <a
-                                href="#business"
+                            <Link
+                                to="/farmerProfile"
                                 className="hover:text-yellow-400 transition duration-300"
                             >
-                                Business Opportunities
-                            </a>
+                                Farmer Profile
+                            </Link>
                         </li>
                         <li>
                             <Link
@@ -45,20 +45,20 @@ const Navbar = () => {
                             </Link>
                         </li>
                         <li>
-                            <a
-                                href="#lpg"
+                            <Link
+                                to="/driverProfile"
                                 className="hover:text-yellow-400 transition duration-300"
                             >
-                                LPG
-                            </a>
+                                Driver 
+                            </Link>
                         </li>
                         <li>
-                            <a
-                                href="#lubes"
+                            <Link
+                                to="/adminManagement"
                                 className="hover:text-yellow-400 transition duration-300"
                             >
-                                Lubes
-                            </a>
+                                Admin
+                            </Link>
                         </li>
                         <li>
                             <a
@@ -77,12 +77,12 @@ const Navbar = () => {
                             </Link>
                         </li>
                         <li>
-                            <a
-                                href="#gst"
+                            <Link
+                                to="/driverDeliver"
                                 className="hover:text-yellow-400 transition duration-300"
                             >
-                                GST Helpdesk
-                            </a>
+                                Driver Delivery
+                            </Link>
                         </li>
                         <li>
                             <a

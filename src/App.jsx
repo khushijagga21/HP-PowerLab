@@ -14,6 +14,7 @@ import DriverDeliver from './Page/DriverDeliver';
 import AdminDashboard from './Page/AdminDashboard';
 import AdminMangement from './Page/AdminMangement';
 import FarmerCommunity from './Page/FarmerCommunity';
+import DriverDelivery from './Page/DriverDeliver';
 
 function App() {
   return (
@@ -31,11 +32,11 @@ function App() {
         <Route path="/farmerProfile" element={<FarmerProfile/>} /> 
         <Route path="/farmerCommunity" element={<FarmerCommunity />} />   {/* Ye mai bana dunga */}
         
-        <Route path="/driverDelivery" element={<DriverDeliver />} />   
+        <Route path="/driverDeliver" element={<DriverDelivery/>} />   
         <Route path="/driverProfile" element={<Tips />} />   
   
         <Route path="/adminDashboard" element={<AdminDashboard />} />   
-        <Route path="/driverProfile" element={<AdminMangement />} />   
+        <Route path="/adminManagement" element={<AdminMangement />} />   
       </Routes>
       <Footer />
     </Router>
