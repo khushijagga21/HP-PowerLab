@@ -1,7 +1,5 @@
 // Import necessary libraries
 import React, { useState } from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
 
 const FarmerCommunity = () => {
   const [farmers, setFarmers] = useState([
@@ -17,7 +15,6 @@ const FarmerCommunity = () => {
   ]);
 
   const [newPost, setNewPost] = useState("");
-  const [loading, setLoading] = useState(false);
 
   const addPost = () => {
     if (newPost.trim().length < 10) {
@@ -84,34 +81,10 @@ const FarmerCommunity = () => {
         </div>
       </div>
 
-      {/* Map Integration */}
+      {/* Placeholder for Map */}
       <div className="bg-white p-8 rounded-lg shadow-2xl">
         <h2 className="text-4xl font-bold text-teal-600 mb-6 border-b-4 border-teal-300 pb-3">Nearby Villages</h2>
-        {loading ? (
-          <p>Loading map...</p>
-        ) : (
-          <MapContainer
-            center={[28.6139, 77.209]} // Replace with actual coordinates
-            zoom={10}
-            className="w-full h-96 rounded-lg shadow-lg"
-          >
-            <TileLayer
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              attribution="&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors"
-            />
-            {farmers.map((farmer, index) => (
-              <Marker
-                key={index}
-                position={[28.6139 + index * 0.02, 77.209 + index * 0.02]} // Adjust for unique locations
-              >
-                <Popup>
-                  <strong>{farmer.name}</strong><br />
-                  {farmer.village}
-                </Popup>
-              </Marker>
-            ))}
-          </MapContainer>
-        )}
+        <p className="text-gray-700 text-center">Map feature is currently unavailable.</p>
       </div>
     </div>
   );
