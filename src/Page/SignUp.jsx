@@ -9,6 +9,7 @@ const Signup = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '', // Added phone field
     password: '',
     confirmPassword: '',
     role: '',
@@ -27,7 +28,7 @@ const Signup = () => {
   const handleSignUp = async (e) => {
     e.preventDefault();
 
-    const { name, email, password, confirmPassword, role } = formData;
+    const { name, email, phone, password, confirmPassword, role } = formData;
 
     if (!role) {
       toast.error('Please select a role.');
@@ -51,7 +52,7 @@ const Signup = () => {
 
       if (userId) {
         const { error: dbError } = await supabase.from('users').insert([
-          { id: userId, name, role, email },
+          { id: userId, name, role, email, phone }, // Save phone number
         ]);
 
         if (dbError) {
@@ -66,10 +67,8 @@ const Signup = () => {
 
   return (
     <div className="min-h-[88vh] flex justify-center bg-gradient-to-r from-blue-50 to-green-50">
-
       <Toaster /> {/* Add Toaster component */}
       <div className="flex justify-between max-w-[88rem]">
-
         {/* Left Section - Form */}
         <div className="w-[40%] flex items-center justify-center">
           <form
@@ -105,6 +104,21 @@ const Signup = () => {
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="Enter your email"
+                required
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 text-gray-900"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
+                Phone Number
+              </label>
+              <input
+                type="tel"
+                id="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                placeholder="Enter your phone number"
                 required
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 text-gray-900"
               />
@@ -193,8 +207,10 @@ const Signup = () => {
         </div>
 
         {/* Right Section - Image/Text */}
-        <div className="w-1/2 flex flex-col justify-center items-center  text-blue-900 p-6 lg:p-10">
-          <h1 className="bg-gradient-to-r from-blue-600 to-green-600 text-transparent bg-clip-text  text-4xl font-bold mb-4">Welcome to Our Platform</h1>
+        <div className="w-1/2 flex flex-col justify-center items-center text-blue-900 p-6 lg:p-10">
+          <h1 className="bg-gradient-to-r from-blue-600 to-green-600 text-transparent bg-clip-text text-4xl font-bold mb-4">
+            Welcome to Our Platform
+          </h1>
           <p className="text-lg text-center mb-6">
             Join us to explore the possibilities and make a difference with your role as a Farmer, Driver, or Admin.
             Be part of the revolution!
@@ -205,10 +221,8 @@ const Signup = () => {
             autoplay
             className="h-96"
           />
-
         </div>
       </div>
-
     </div>
   );
 };

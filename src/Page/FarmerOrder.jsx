@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../utils/supabaseClient';
 import { toast, Toaster } from 'react-hot-toast';
-import {  ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 const FarmerOrder = () => {
 
@@ -13,6 +13,7 @@ const FarmerOrder = () => {
   ];
   const [formData, setFormData] = useState({
     name: '',
+    phone: '',
     fuelType: 'Petrol',
     quantity: '',
     address: '',
@@ -21,33 +22,55 @@ const FarmerOrder = () => {
   const [message, setMessage] = useState('');
 
   useEffect(() => {
-    // Fetch the logged-in user's name
+    // Fetch the logged-in user's name and phone
     const fetchUserName = async () => {
       try {
-        const {
-          data: { user },
-          error: userError,
-        } = await supabase.auth.getUser();
-
-        if (userError) throw userError;
-
+        // Get the current user
+        const { data: { user }, error: userError } = await supabase.auth.getUser();
+  
+        if (userError) {
+          throw new Error(userError.message); // If there is an error fetching user
+        }
+  
+        // Check if user exists and has id
+        if (!user || !user.id) {
+          throw new Error('User not logged in.');
+        }
+  
+        // Fetch the user details (name and phone)
         const { data, error } = await supabase
           .from('users')
-          .select('name')
+          .select('*')
           .eq('id', user.id)
-          .single();
-
-        if (error) throw error;
-
-        setFormData((prev) => ({ ...prev, name: data.name }));
+          .single();  // Ensures only one record is returned
+  
+        if (error) {
+          throw new Error(error.message); // If there is an error fetching user data
+        }
+  console.log(data)
+        // Check if data is returned and destructure the name and phone
+        if (data) {
+          const { name, phone } = data;
+  
+          // Update the formData with user details
+          setFormData((prev) => ({
+            ...prev,
+            name,
+            phone,
+          }));
+        } else {
+          throw new Error('No user data found.');
+        }
       } catch (err) {
-        console.error('Error fetching user name:', err.message);
-        setMessage('Failed to fetch user name. Please refresh the page and try again.');
+        console.error('Error fetching user data:', err.message);
+        setMessage('Failed to fetch user data. Please refresh the page and try again.');
       }
     };
-
+  
     fetchUserName();
-  }, []);
+  }, []); // Empty dependency array ensures this only runs once on component mount
+  
+
 
   const detectCurrentLocation = () => {
     if (!navigator.geolocation) {
@@ -82,6 +105,7 @@ const FarmerOrder = () => {
     try {
       const { error } = await supabase.from('fuel_order').insert({
         farmer_name: formData.name,
+        farmer_phone: formData.phone,
         fuel_type: formData.fuelType,
         quantity: parseFloat(formData.quantity),
         address: formData.address,
@@ -116,6 +140,20 @@ const FarmerOrder = () => {
             id="name"
             name="name"
             value={formData.name}
+            onChange={handleChange}
+            readOnly
+            className="w-full p-3 border border-gray-300 rounded-lg bg-gray-100 text-gray-600 cursor-not-allowed"
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="name" className="block text-gray-700 font-medium mb-2">
+            Phone No
+          </label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={formData.phone}
             onChange={handleChange}
             readOnly
             className="w-full p-3 border border-gray-300 rounded-lg bg-gray-100 text-gray-600 cursor-not-allowed"
@@ -202,11 +240,11 @@ const FarmerOrder = () => {
           <div
             class="bg-green-400 rounded-xl h-12 w-1/4 flex items-center justify-center absolute left-1 top-[4px] group-hover:w-[99%] z-10 duration-500"
           >
-            <ArrowRight/>
+            <ArrowRight />
           </div>
           <p class="translate-x-2">{loading ? 'Placing Order...' : 'Place Order'}</p>
         </button>
-        
+
       </form>
     </div>
   );
