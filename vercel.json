@@ -5,9 +5,6 @@
         "src": "/(.*)", 
         "dest": "/index.html"
       }
-    ],
-    "errorPages": {
-      "404": "/404.html"
-    }
+    ]
   }
   
