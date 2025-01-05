@@ -182,6 +182,13 @@ const Signup = () => {
             >
               Sign Up
             </button>
+            <p className="text-sm text-gray-600 text-center">
+              Already have an account?{' '}
+              <a href="/login" className="text-blue-600 hover:underline">
+                Log in here
+              </a>.
+            </p>
+
           </form>
         </div>
 
@@ -198,7 +205,7 @@ const Signup = () => {
             autoplay
             className="h-96"
           />
-          
+
         </div>
       </div>
 
