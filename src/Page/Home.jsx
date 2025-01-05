@@ -104,7 +104,7 @@ const LandingPage = () => {
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500/30 to-green-500/30 rounded-3xl transform rotate-3" />
               <img
-                src="public/truck.jpeg"
+                src="/truck.jpeg"
                 alt="Fuel Delivery"
                 className="relative rounded-2xl shadow-2xl"
               />

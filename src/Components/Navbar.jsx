@@ -85,7 +85,7 @@ const Navbar = () => {
                     {/* Logo Section */}
                     <Link to="/" className="flex items-center space-x-2">
                         <img
-                            src="public/small.png" // Replace with the actual logo path
+                            src="/small.png" // Replace with the actual logo path
                             alt="HP Logo"
                             className="h-12 w-12 rounded-full object-contain"
                         />
