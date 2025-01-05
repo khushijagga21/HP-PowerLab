@@ -1,132 +1,175 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom'; // Import useLocation
-
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { supabase } from '../utils/supabaseClient'; // Import Supabase client
+import { Fuel, Menu } from 'lucide-react';
 
 const Navbar = () => {
-    const location = useLocation(); // Get the current location
+    const location = useLocation();
+    const navigate = useNavigate();
+    const [role, setRole] = useState(null);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    // Fetch role from Supabase
+    useEffect(() => {
+        const fetchRole = async () => {
+            try {
+                const {
+                    data: { user },
+                    error: userError,
+                } = await supabase.auth.getUser();
+
+                if (userError) throw userError;
+
+                if (!user) {
+                    setRole(null);
+                    return;
+                }
+
+                const { data, error } = await supabase
+                    .from('users')
+                    .select('role')
+                    .eq('id', user.id)
+                    .single();
+
+                if (error) throw error;
+
+                setRole(data.role);
+            } catch (err) {
+                console.error('Error fetching role:', err.message);
+                setRole(null);
+            }
+        };
+
+        fetchRole();
+    }, []);
+
+    // Logout Handler
+    const handleLogout = async () => {
+        const { error } = await supabase.auth.signOut();
+        if (error) {
+            console.error('Logout Error:', error.message);
+        } else {
+            setRole(null);
+            navigate('/login');
+        }
+    };
+
+    // Links based on roles
+    const links = {
+        Farmer: [
+            { to: '/farmerProfile', label: 'Farmer Profile' },
+            { to: '/farmerOrder', label: 'Place Order' },
+            { to: '/farmerCommunity', label: 'Community' },
+            { to: '/tips', label: 'Tips' },
+        ],
+        Driver: [
+            { to: '/driverDeliver', label: 'Delivery' },
+            { to: '/tips', label: 'Tips' },
+        ],
+        Admin: [
+            { to: '/adminDashboard', label: 'Dashboard' },
+            { to: '/adminManagement', label: 'Management' },
+        ],
+        Guest: [
+            { to: '/', label: 'Home' },
+            { to: '/about', label: 'About Us' },
+        ],
+    };
+
+    const currentLinks = role ? links[role] : links['Guest'];
 
     return (
-        <nav className="bg-blue-900 text-white shadow-lg">
-            <div className="container mx-auto px-4">
-                <div className="flex items-center justify-between h-16">
+        <nav className="bg-gradient-to-br from-blue-50 to-green-50 backdrop-blur-md sticky top-0 z-50 border-b border-slate-100">
+            <div className="max-w-[88rem] mx-auto px-4 sm:px-6 lg:px-8 py-4">
+                <div className="flex items-center justify-between">
                     {/* Logo Section */}
-                    <div className="flex items-center space-x-2">
+                    <Link to="/" className="flex items-center space-x-2">
                         <img
-                            src="/path/to/logo.png" // Replace with the actual logo path
+                            src="src/assets/small.png" // Replace with the actual logo path
                             alt="HP Logo"
-                            className="h-10 w-10 object-contain"
+                            className="h-12 w-12 rounded-full object-contain"
                         />
-                        <span className="text-xl font-bold">HP</span>
+                        <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-green-600 text-transparent bg-clip-text">
+                        </span>
+                    </Link>
+
+                    {/* Desktop Navigation Links */}
+                    <div className="hidden md:flex space-x-6">
+                        {currentLinks.map((link, index) => (
+                            <Link
+                                key={index}
+                                to={link.to}
+                                className="hover:text-blue-600 text-gray-700 transition duration-300"
+                            >
+                                {link.label}
+                            </Link>
+                        ))}
                     </div>
-                    {/* Navigation Links */}
-                    <ul className="hidden md:flex space-x-6">
-                        <li>
-                            <Link
-                                to="/about"
-                                className="hover:text-yellow-400 transition duration-300"
+
+                    {/* Desktop Action Buttons */}
+                    <div className="hidden md:flex space-x-3">
+                        {role ? (
+                            <button
+                                onClick={handleLogout}
+                                className="border border-gray-300 hover:bg-gray-200 text-gray-800 font-medium py-2 px-4 rounded transition duration-300"
                             >
-                                About Us
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                to="/farmerProfile"
-                                className="hover:text-yellow-400 transition duration-300"
-                            >
-                                Farmer Profile
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                to="/tips"
-                                className="hover:text-yellow-400 transition duration-300"
-                            >
-                                Tips
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                to="/driverProfile"
-                                className="hover:text-yellow-400 transition duration-300"
-                            >
-                                Driver 
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                to="/adminManagement"
-                                className="hover:text-yellow-400 transition duration-300"
-                            >
-                                Admin
-                            </Link>
-                        </li>
-                        <li>
-                            <a
-                                href="#direct"
-                                className="hover:text-yellow-400 transition duration-300"
-                            >
-                                Direct
-                            </a>
-                        </li>
-                        <li>
-                            <Link
-                                to="/order"
-                                className="hover:text-yellow-400 transition duration-300"
-                            >
-                                Place Order
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                to="/driverDeliver"
-                                className="hover:text-yellow-400 transition duration-300"
-                            >
-                                Driver Delivery
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                to="farmerCommunity"
-                                className="hover:text-yellow-400 transition duration-300"
-                            >
-                                Community
-                            </Link>
-                        </li>
-                    </ul>
-                    {/* Conditional Buttons */}
-                    {location.pathname === '/order' && (
-                        <div className="hidden md:flex space-x-4">
-                            <button className="bg-blue-500 hover:bg-yellow-600 text-white font-semibold py-2 px-4 rounded">
-                                Cart
+                                Logout
                             </button>
-                            <button className="bg-blue-500 hover:bg-yellow-600 text-white font-semibold py-2 px-4 rounded">
-                                Wishlist
-                            </button>
-                        </div>
-                    )}
+                        ) : (
+                            <>
+                                <Link
+                                    to="/login"
+                                    className="border border-gray-300 hover:bg-gray-200 text-gray-800 font-medium py-2 px-4 rounded transition duration-300"
+                                >
+                                    Sign In
+                                </Link>
+                                <Link
+                                    to="/signup"
+                                    className="bg-gradient-to-r from-blue-600 to-green-600 hover:from-blue-700 hover:to-green-700 text-white font-medium py-2 px-4 rounded transition duration-300"
+                                >
+                                    Get Started
+                                </Link>
+                            </>
+                        )}
+                    </div>
+
                     {/* Mobile Menu Button */}
-                    <div className="md:hidden">
-                        <button
-                            type="button"
-                            className="text-yellow-400 hover:text-white focus:outline-none"
-                        >
-                            <svg
-                                className="w-6 h-6"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M4 6h16M4 12h16m-7 6h7"
-                                />
-                            </svg>
-                        </button>
-                    </div>
+                    <button
+                        className="md:hidden text-gray-700 hover:text-blue-600 transition duration-300"
+                        onClick={() => setIsMenuOpen(!isMenuOpen)}
+                    >
+                        <Menu className="h-6 w-6" />
+                    </button>
                 </div>
+
+                {/* Mobile Navigation Menu */}
+                {isMenuOpen && (
+                    <div className="md:hidden">
+                        <ul className="space-y-4 mt-4">
+                            {currentLinks.map((link, index) => (
+                                <li key={index}>
+                                    <Link
+                                        to={link.to}
+                                        className="block text-gray-800 hover:bg-blue-100 px-4 py-2 rounded transition duration-300"
+                                        onClick={() => setIsMenuOpen(false)} // Close menu on click
+                                    >
+                                        {link.label}
+                                    </Link>
+                                </li>
+                            ))}
+                            {role && (
+                                <li>
+                                    <button
+                                        onClick={handleLogout}
+                                        className="block w-full text-left text-gray-800 hover:bg-red-100 px-4 py-2 rounded transition duration-300"
+                                    >
+                                        Logout
+                                    </button>
+                                </li>
+                            )}
+                        </ul>
+                    </div>
+                )}
             </div>
         </nav>
     );
