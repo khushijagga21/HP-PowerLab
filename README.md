@@ -17,38 +17,45 @@
 
 <h2 id="technologies">💻 Technologies</h2>
 
-- list of all technologies you used
 - React
 - Tailwind CSS
 - Firebase
 
-<h2 id="started">🚀 Getting started</h2>
+<h2 id="started">🚀 How to run the Project Locally</h2>
 
-Here you describe how to run your project locally
 
-<h3>Prerequisites</h3>
 
-Here you list all prerequisites necessary for running your project. For example:
+<h3>Download and install nodejs</h3>
 
-- [NodeJS](https://github.com/)
-- [React Libraries](https://github.com)
-
-<h3>Cloning</h3>
-
-How to clone your project
+Verify Installation
 
 ```bash
-git clone your-project-url-in-github
+node -v
 ```
 
-<h3>How to run the Frontend</h2>
+<h3> Create React App</h2>
 
-Use the `npm install` to install the node package Manager 
+Use the `command ` to create a react app  in your folder
 
 ```yaml
+npx create-react-app my-app
+```
+
+<h3>Install Dependencies</h3>
+
+Run
+
+```bash
 npm install
 ```
 
+<h3> Start the Development Server</h3>
+
+Run
+
+```bash
+npm start
+```
 
 
 
