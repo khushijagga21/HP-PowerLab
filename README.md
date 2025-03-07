@@ -38,7 +38,7 @@ node -v
 Use the `command ` to create a react app  in your folder
 
 ```yaml
-npx create-react-app my-app
+npx create-react-app <app name>
 ```
 
 <h3>Install Dependencies</h3>
