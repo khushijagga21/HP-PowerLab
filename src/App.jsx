@@ -14,6 +14,8 @@ import AdminMangement from './Page/AdminMangement';
 import FarmerCommunity from './Page/FarmerCommunity';
 import Tips from './Page/Tips';
 import Prices from './Page/Prices';
+import Chatbot from "./Components/Chatbot"; // Adjust the path if needed
+
 
 // Protected Route Component
 const ProtectedRoute = ({ element, allowedRoles }) => {
@@ -46,6 +48,9 @@ const App = () => {
         <div className="flex flex-col min-h-screen">
           {/* Navbar */}
           <Navbar />
+
+            {/*Chatbot*/}
+            <Chatbot />
           {/* Main Content */}
           <div className="flex-grow">
             <Routes>
