@@ -67,4 +67,4 @@ Here you will explain how other developers can contribute to your project. For e
 
 [📝 How to create a Pull Request](https://www.geeksforgeeks.org/git-pull-request/)
 
-[💾 Commit pattern](https://gist.github.com/joshbuchea/6f47e86d2510bce28f8e7f42ae84c716)
+[💾 Commit pattern](https://gist.github.com/qoomon/5dfcdf8eec66a051ecd85625518cfd13)
