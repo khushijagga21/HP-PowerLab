@@ -10,7 +10,7 @@
 </p>
 
 
-<p align="center">Simple description of what your project do or how to use it</p>
+<p align="center">The HP Fuel Order Management System is a specialized web platform designed to simplify fuel procurement for rural farmers. With dedicated portals for farmers, drivers, and admins, the system enables seamless fuel ordering, real-time tracking, and efficient delivery management. Farmers can easily place fuel orders, while drivers manage the received orders, and admins oversee operations for smooth execution. This system enhances accessibility, reduces delays, and ensures a reliable fuel supply for agricultural needs.</p>
 
 
 <p align="center">
